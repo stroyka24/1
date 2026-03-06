@@ -182,6 +182,22 @@
             color: var(--accent);
         }
 
+        .nav {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav a:hover {
+            color: var(--accent);
+        }
+
         .header-phone {
             font-weight: 700;
             color: var(--accent);
@@ -716,12 +732,6 @@
             color: var(--gray);
         }
 
-        .work-hours {
-            margin-top: 1rem;
-            font-size: 0.9rem;
-            color: var(--gray);
-        }
-
         /* Modal */
         .modal {
             display: none;
@@ -943,6 +953,11 @@
                 gap: 0.5rem;
             }
 
+            .nav {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
             .modal-content {
                 padding: 2rem 1.5rem;
             }
@@ -954,7 +969,15 @@
     <header class="header">
         <div class="container">
             <div class="header-inner">
-                <a href="#" class="logo">ВАША<span>СТРОЙКА24</span></a>
+                <a href="index.html" class="logo">ВАША<span>СТРОЙКА24</span></a>
+                
+                <nav class="nav">
+                    <a href="index.html">Главная</a>
+                    <a href="portfolio.html">Портфолио</a>
+                    <a href="index.html#services">Услуги</a>
+                    <a href="index.html#contact">Контакты</a>
+                </nav>
+                
                 <a href="tel:+79509217340" class="header-phone">+7 (950) 921-73-40</a>
             </div>
         </div>
@@ -1255,7 +1278,7 @@
             <div class="blog-grid">
                 <!-- Article 1 -->
                 <div class="blog-card">
-                    <div class="blog-image" style="background-image: url('/1/images/blog-roof.jpg');"></div>
+                    <div class="blog-image" style="background-image: url('/1/images/hero-building.jpg');"></div>
                     <div class="blog-content">
                         <div class="blog-date">15 марта 2025</div>
                         <h3>Как выбрать тип кровли для частного дома?</h3>
@@ -1275,7 +1298,7 @@
 
                 <!-- Article 2 -->
                 <div class="blog-card">
-                    <div class="blog-image" style="background-image: url('/1/images/blog-insulation.jpg');"></div>
+                    <div class="blog-image" style="background-image: url('/1/images/hero-building.jpg');"></div>
                     <div class="blog-content">
                         <div class="blog-date">2 марта 2025</div>
                         <h3>5 вопросов про утепление фасада</h3>
@@ -1295,7 +1318,7 @@
 
                 <!-- Article 3 -->
                 <div class="blog-card">
-                    <div class="blog-image" style="background-image: url('/1/images/blog-terrace.jpg');"></div>
+                    <div class="blog-image" style="background-image: url('/1/images/hero-building.jpg');"></div>
                     <div class="blog-content">
                         <div class="blog-date">20 февраля 2025</div>
                         <h3>Беседка или терраса: что лучше?</h3>
@@ -1369,8 +1392,10 @@
                 <div>
                     <h4>Меню</h4>
                     <nav class="footer-nav">
-                        <a href="#">Главная</a>
-                        <a href="#services">Услуги</a>
+                        <a href="index.html">Главная</a>
+                        <a href="portfolio.html">Портфолио</a>
+                        <a href="index.html#services">Услуги</a>
+                        <a href="index.html#contact">Контакты</a>
                     </nav>
                 </div>
                 <div>
