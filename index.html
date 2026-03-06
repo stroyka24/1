@@ -1271,73 +1271,72 @@
         </div>
     </section>
 
-    <!-- Blog Section -->
-    <section class="section blog">
-        <div class="container">
-            <h2>Полезные статьи</h2>
-            <div class="blog-grid">
-                <!-- Article 1 -->
-                <div class="blog-card">
-                    <div class="blog-image" style="background-image: url('/1/images/hero-building.jpg');"></div>
-                    <div class="blog-content">
-                        <div class="blog-date">15 марта 2025</div>
-                        <h3>Как выбрать тип кровли для частного дома?</h3>
-                        <div class="blog-content-preview">
-                            Металлочерепица, мягкая кровля или профнастил? Рассказываем о плюсах и минусах.
-                        </div>
-                        <div class="blog-content-full" id="blog1">
-                            <p><strong>Металлочерепица</strong> — долговечна, доступна по цене, большой выбор цветов. Срок службы до 50 лет.</p>
-                            <p><strong>Мягкая кровля</strong> — идеальна для сложных крыш, не шумит во время дождя, но дороже.</p>
-                            <p><strong>Профнастил</strong> — бюджетный вариант, прост в монтаже, подходит для хозяйственных построек.</p>
-                        </div>
-                        <button class="read-more-btn" onclick="toggleBlog('blog1', this)">
-                            <span>Читать далее</span> <i class="fas fa-chevron-down"></i>
-                        </button>
+   <!-- Blog Section -->
+<section class="section blog">
+    <div class="container">
+        <h2>Полезные статьи</h2>
+        <div class="blog-grid">
+            <!-- Article 1 - Кровля -->
+            <div class="blog-card">
+                <div class="blog-image" style="background-image: url('/1/images/blog-roof.jpg');"></div>
+                <div class="blog-content">
+                    <div class="blog-date">15 марта 2025</div>
+                    <h3>Как выбрать тип кровли для частного дома?</h3>
+                    <div class="blog-content-preview">
+                        Металлочерепица, мягкая кровля или профнастил? Рассказываем о плюсах и минусах.
                     </div>
+                    <div class="blog-content-full" id="blog1">
+                        <p><strong>Металлочерепица</strong> — долговечна, доступна по цене, большой выбор цветов. Срок службы до 50 лет.</p>
+                        <p><strong>Мягкая кровля</strong> — идеальна для сложных крыш, не шумит во время дождя, но дороже.</p>
+                        <p><strong>Профнастил</strong> — бюджетный вариант, прост в монтаже, подходит для хозяйственных построек.</p>
+                    </div>
+                    <button class="read-more-btn" onclick="toggleBlog('blog1', this)">
+                        <span>Читать далее</span> <i class="fas fa-chevron-down"></i>
+                    </button>
                 </div>
+            </div>
 
-                <!-- Article 2 -->
-                <div class="blog-card">
-                    <div class="blog-image" style="background-image: url('/1/images/hero-building.jpg');"></div>
-                    <div class="blog-content">
-                        <div class="blog-date">2 марта 2025</div>
-                        <h3>5 вопросов про утепление фасада</h3>
-                        <div class="blog-content-preview">
-                            Зачем утеплять дом? Какой утеплитель лучше? Когда лучше проводить работы?
-                        </div>
-                        <div class="blog-content-full" id="blog2">
-                            <p><strong>Зачем утеплять?</strong> Это снижает затраты на отопление до 40%.</p>
-                            <p><strong>Лучший утеплитель</strong> — минеральная вата или пенополистирол.</p>
-                            <p><strong>Когда утеплять?</strong> Лучше всего в теплое время года при сухой погоде.</p>
-                        </div>
-                        <button class="read-more-btn" onclick="toggleBlog('blog2', this)">
-                            <span>Читать далее</span> <i class="fas fa-chevron-down"></i>
-                        </button>
+            <!-- Article 2 - Утепление -->
+            <div class="blog-card">
+                <div class="blog-image" style="background-image: url('/1/images/blog-insulation.jpg');"></div>
+                <div class="blog-content">
+                    <div class="blog-date">2 марта 2025</div>
+                    <h3>5 вопросов про утепление фасада</h3>
+                    <div class="blog-content-preview">
+                        Зачем утеплять дом? Какой утеплитель лучше? Когда лучше проводить работы?
                     </div>
+                    <div class="blog-content-full" id="blog2">
+                        <p><strong>Зачем утеплять?</strong> Это снижает затраты на отопление до 40%.</p>
+                        <p><strong>Лучший утеплитель</strong> — минеральная вата или пенополистирол.</p>
+                        <p><strong>Когда утеплять?</strong> Лучше всего в теплое время года при сухой погоде.</p>
+                    </div>
+                    <button class="read-more-btn" onclick="toggleBlog('blog2', this)">
+                        <span>Читать далее</span> <i class="fas fa-chevron-down"></i>
+                    </button>
                 </div>
+            </div>
 
-                <!-- Article 3 -->
-                <div class="blog-card">
-                    <div class="blog-image" style="background-image: url('/1/images/hero-building.jpg');"></div>
-                    <div class="blog-content">
-                        <div class="blog-date">20 февраля 2025</div>
-                        <h3>Беседка или терраса: что лучше?</h3>
-                        <div class="blog-content-preview">
-                            Сравниваем плюсы и минусы, чтобы сделать правильный выбор для вашего участка.
-                        </div>
-                        <div class="blog-content-full" id="blog3">
-                            <p><strong>Беседка</strong> — отдельно стоящее сооружение. Идеально для больших участков.</p>
-                            <p><strong>Терраса</strong> — пристройка к дому. Экономит место, удобна для выхода прямо из дома.</p>
-                        </div>
-                        <button class="read-more-btn" onclick="toggleBlog('blog3', this)">
-                            <span>Читать далее</span> <i class="fas fa-chevron-down"></i>
-                        </button>
+            <!-- Article 3 - Террасы -->
+            <div class="blog-card">
+                <div class="blog-image" style="background-image: url('/1/images/blog-terrace.jpg');"></div>
+                <div class="blog-content">
+                    <div class="blog-date">20 февраля 2025</div>
+                    <h3>Беседка или терраса: что лучше?</h3>
+                    <div class="blog-content-preview">
+                        Сравниваем плюсы и минусы, чтобы сделать правильный выбор для вашего участка.
                     </div>
+                    <div class="blog-content-full" id="blog3">
+                        <p><strong>Беседка</strong> — отдельно стоящее сооружение. Идеально для больших участков.</p>
+                        <p><strong>Терраса</strong> — пристройка к дому. Экономит место, удобна для выхода прямо из дома.</p>
+                    </div>
+                    <button class="read-more-btn" onclick="toggleBlog('blog3', this)">
+                        <span>Читать далее</span> <i class="fas fa-chevron-down"></i>
+                    </button>
                 </div>
             </div>
         </div>
-    </section>
-
+    </div>
+</section>
     <!-- Contact Info Section (вместо формы) -->
     <section id="contact" class="section contact-info-section">
         <div class="container">
