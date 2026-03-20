@@ -338,76 +338,71 @@
 
 <script>
 (function() {
-    // Пыль и песок
+    // ========== ПЫЛЬ И ПЕСОК ==========
     const dustContainer = document.getElementById('dustContainer');
-    function createDustCluster() {
-        const dust = document.createElement('div');
-        dust.style.cssText = `
-            position: absolute;
-            background: radial-gradient(ellipse at center, rgba(230,126,74,0.5) 0%, rgba(210,90,40,0.2) 40%, transparent 70%);
-            border-radius: 50%;
-            width: ${Math.random() * 60 + 30}px;
-            height: ${Math.random() * 60 + 30}px;
-            left: ${Math.random() * 100}%;
-            top: ${Math.random() * 80 + 10}%;
-            filter: blur(5px);
-            animation: dustFloat ${Math.random() * 5 + 4}s ease-in-out infinite;
-            opacity: 0;
-            pointer-events: none;
-        `;
-        dustContainer.appendChild(dust);
-        setTimeout(() => dust.remove(), 8000);
-    }
-    function createSandParticle() {
-        const particle = document.createElement('div');
-        const dx = (Math.random() * 150 - 75);
-        const dy = -(Math.random() * 80 + 40);
-        particle.style.cssText = `
-            position: absolute;
-            background: radial-gradient(ellipse at center, #E67E4A 0%, #B85C2A 60%, transparent 80%);
-            border-radius: 50%;
-            width: ${Math.random() * 5 + 2}px;
-            height: ${Math.random() * 5 + 2}px;
-            left: ${Math.random() * 100}%;
-            top: ${Math.random() * 80 + 10}%;
-            filter: blur(1px);
-            animation: sandBlow ${Math.random() * 2 + 2}s ease-out forwards;
-            pointer-events: none;
-        `;
-        dustContainer.appendChild(particle);
-        setTimeout(() => particle.remove(), 4000);
-    }
-    const style = document.createElement('style');
-    style.textContent = `
-        @keyframes dustFloat {
-            0% { opacity: 0; transform: translateY(0) scale(0.8); }
-            20% { opacity: 0.6; }
-            80% { opacity: 0.3; }
-            100% { opacity: 0; transform: translateY(-120px) scale(1.4); }
+    if (dustContainer) {
+        function createDustCluster() {
+            const dust = document.createElement('div');
+            dust.style.cssText = `
+                position: absolute;
+                background: radial-gradient(ellipse at center, rgba(230,126,74,0.5) 0%, rgba(210,90,40,0.2) 40%, transparent 70%);
+                border-radius: 50%;
+                width: ${Math.random() * 60 + 30}px;
+                height: ${Math.random() * 60 + 30}px;
+                left: ${Math.random() * 100}%;
+                top: ${Math.random() * 80 + 10}%;
+                filter: blur(5px);
+                animation: dustFloat ${Math.random() * 5 + 4}s ease-in-out infinite;
+                opacity: 0;
+                pointer-events: none;
+            `;
+            dustContainer.appendChild(dust);
+            setTimeout(() => dust.remove(), 8000);
         }
-        @keyframes sandBlow {
-            0% { opacity: 0.8; transform: translateX(0) translateY(0); }
-            100% { opacity: 0; transform: translateX(${dx}px) translateY(${dy}px); }
+        function createSandParticle() {
+            const particle = document.createElement('div');
+            const dx = (Math.random() * 150 - 75);
+            const dy = -(Math.random() * 80 + 40);
+            particle.style.cssText = `
+                position: absolute;
+                background: radial-gradient(ellipse at center, #E67E4A 0%, #B85C2A 60%, transparent 80%);
+                border-radius: 50%;
+                width: ${Math.random() * 5 + 2}px;
+                height: ${Math.random() * 5 + 2}px;
+                left: ${Math.random() * 100}%;
+                top: ${Math.random() * 80 + 10}%;
+                filter: blur(1px);
+                animation: sandBlow ${Math.random() * 2 + 2}s ease-out forwards;
+                pointer-events: none;
+            `;
+            dustContainer.appendChild(particle);
+            setTimeout(() => particle.remove(), 4000);
         }
-    `;
-    document.head.appendChild(style);
-    setInterval(() => { if (!document.getElementById('preloader')?.classList.contains('hide')) createDustCluster(); }, 1000);
-    setInterval(() => { if (!document.getElementById('preloader')?.classList.contains('hide')) for(let i=0;i<4;i++) createSandParticle(); }, 250);
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes dustFloat {
+                0% { opacity: 0; transform: translateY(0) scale(0.8); }
+                20% { opacity: 0.6; }
+                80% { opacity: 0.3; }
+                100% { opacity: 0; transform: translateY(-120px) scale(1.4); }
+            }
+            @keyframes sandBlow {
+                0% { opacity: 0.8; transform: translateX(0) translateY(0); }
+                100% { opacity: 0; transform: translateX(${dx}px) translateY(${dy}px); }
+            }
+        `;
+        document.head.appendChild(style);
+        setInterval(() => { if (!document.getElementById('preloader')?.classList.contains('hide')) createDustCluster(); }, 1000);
+        setInterval(() => { if (!document.getElementById('preloader')?.classList.contains('hide')) for(let i=0;i<4;i++) createSandParticle(); }, 250);
+    }
 
-    // Видео и загрузка
-    const video = document.getElementById('preloaderVideo');
-    let videoReady = false;
-    if (video) {
-        video.addEventListener('canplaythrough', () => { videoReady = true; });
-        video.addEventListener('error', () => { console.warn('Видео не загрузилось, продолжаем'); videoReady = true; });
-        setTimeout(() => { if (!videoReady) videoReady = true; }, 3000);
-    } else { videoReady = true; }
-
+    // ========== ГЛАВНАЯ ЛОГИКА ЗАГРУЗКИ ==========
     let percent = 0;
     const percentElement = document.getElementById('loadingPercent');
     const statusElement = document.getElementById('loadingStatus');
     const preloader = document.getElementById('preloader');
     const mainContent = document.getElementById('mainContent');
+    
     const statusMessages = [
         { at: 0, text: '🎞️ Загрузка архивной плёнки...' },
         { at: 15, text: '📼 Оцифровка кадров саванны...' },
@@ -418,35 +413,71 @@
         { at: 90, text: '📀 Почти готово...' },
         { at: 100, text: '✓ AFRICA PRIVÉ | Плёнка готова' }
     ];
+    
     function updateStatus(currentPercent) {
+        if (!statusElement) return;
         for (let i = statusMessages.length - 1; i >= 0; i--) {
             if (currentPercent >= statusMessages[i].at) {
-                if (statusElement) statusElement.textContent = statusMessages[i].text;
+                statusElement.textContent = statusMessages[i].text;
                 break;
             }
         }
     }
+    
     function finishLoading() {
+        console.log('Завершение загрузки, показываем основной контент');
         if (preloader) preloader.classList.add('hide');
         if (mainContent) mainContent.classList.add('visible');
-        setTimeout(() => { if (preloader && preloader.parentNode) preloader.style.display = 'none'; }, 1000);
+        setTimeout(() => {
+            if (preloader && preloader.parentNode) preloader.style.display = 'none';
+        }, 1000);
     }
-    const interval = setInterval(() => {
-        percent = Math.min(percent + Math.floor(Math.random() * 6) + 2, 100);
+    
+    // Функция увеличения процентов
+    function increasePercent() {
+        if (percent >= 100) return;
+        percent = Math.min(percent + Math.floor(Math.random() * 8) + 3, 100);
         if (percentElement) percentElement.textContent = percent;
         updateStatus(percent);
-        if (percent === 100) {
-            clearInterval(interval);
-            const checkVideo = setInterval(() => {
-                if (videoReady) {
-                    clearInterval(checkVideo);
-                    finishLoading();
-                }
-            }, 50);
-            setTimeout(() => { clearInterval(checkVideo); finishLoading(); }, 2000);
+        
+        if (percent >= 100) {
+            finishLoading();
+        } else {
+            // Продолжаем увеличивать
+            setTimeout(increasePercent, Math.random() * 150 + 80);
         }
-    }, 80);
-    setTimeout(() => { if (preloader && !preloader.classList.contains('hide')) finishLoading(); }, 7000);
+    }
+    
+    // Запускаем увеличение процентов
+    setTimeout(increasePercent, 200);
+    
+    // Ждём видео (если есть) и в любом случае завершаем через 5 секунд
+    const video = document.getElementById('preloaderVideo');
+    if (video) {
+        video.addEventListener('canplaythrough', () => {
+            console.log('Видео загружено');
+            // Не завершаем сразу, даём процентам дойти
+        });
+        video.addEventListener('error', () => {
+            console.warn('Видео не загрузилось, но продолжаем');
+        });
+    }
+    
+    // Абсолютный аварийный выход через 6 секунд (на случай, если проценты застряли)
+    setTimeout(() => {
+        if (preloader && !preloader.classList.contains('hide')) {
+            console.log('Аварийный выход: принудительно показываем контент');
+            finishLoading();
+        }
+    }, 6000);
+    
+    // Также добавим обработчик, если проценты дошли до 100, но по какой-то причине finishLoading не сработал
+    const checkComplete = setInterval(() => {
+        if (percent >= 100 && preloader && !preloader.classList.contains('hide')) {
+            clearInterval(checkComplete);
+            finishLoading();
+        }
+    }, 100);
 })();
 </script>
 </body>
