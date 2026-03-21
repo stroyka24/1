@@ -553,6 +553,74 @@
             .usp-grid { grid-template-columns: 1fr; }
             .gallery-grid { grid-template-columns: 1fr; }
         }
+        /* ========== СТИЛИ ДЛЯ АВАТАРОВ ОТЗЫВОВ ========== */
+.testimonial-avatar {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    overflow: hidden;
+    position: relative;
+    background: linear-gradient(135deg, #E67E4A, #B85C2A);
+    box-shadow: 0 4px 15px rgba(230,126,74,0.3);
+    transition: all 0.4s ease;
+    flex-shrink: 0;
+}
+
+.testimonial-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+    display: block;
+}
+
+.testimonial-card:hover .testimonial-avatar {
+    box-shadow: 0 8px 25px rgba(230,126,74,0.5);
+    transform: scale(1.02);
+}
+
+.testimonial-card:hover .testimonial-avatar img {
+    transform: scale(1.08);
+}
+
+/* Эффект золотой рамки при наведении на всю карточку */
+.testimonial-card {
+    position: relative;
+}
+
+.testimonial-card::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 24px;
+    padding: 1px;
+    background: linear-gradient(135deg, rgba(230,126,74,0), rgba(230,126,74,0.5), rgba(230,126,74,0));
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
+.testimonial-card:hover::after {
+    opacity: 1;
+}
+
+/* Адаптация для мобильных */
+@media (max-width: 768px) {
+    .testimonial-avatar {
+        width: 52px;
+        height: 52px;
+    }
+    .testimonial-text {
+        font-size: 16px;
+    }
+}
     </style>
 </head>
 <body>
@@ -664,16 +732,52 @@
     </section>
 
     <section class="section" id="testimonials">
-        <div class="container">
-            <h2 class="section-title scroll-animate fade-up">Истории наших путешественников</h2>
-            <p class="section-subtitle scroll-animate fade-up">Те, кто уже открыл для себя AFRICA PRIVÉ</p>
-            <div class="testimonials-grid">
-                <div class="testimonial-card scroll-animate scale"><div class="testimonial-text">«Я думал, что Африка — это палатки и антимоскитные сетки. Оказалось — виллы с бесконечными бассейнами, где на завтрак приносят шампанское. Александр показал ЮАР, которой нет в инстаграме. Теперь только с ним».</div><div class="testimonial-author"><img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Михаил"><div class="author-info"><h4>Михаил</h4><p>Основатель IT-компании</p></div></div></div>
-                <div class="testimonial-card scroll-animate scale"><div class="testimonial-text">«Это был мой юбилей с подругами. Мы хотели вайб, люкс и фото. Получили в 10 раз больше. Александр знает все лучшие рестораны и секретные локации. Вернёмся через год».</div><div class="testimonial-author"><img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Екатерина"><div class="author-info"><h4>Екатерина</h4><p>Владелица бутика, Москва</p></div></div></div>
-                <div class="testimonial-card scroll-animate scale"><div class="testimonial-text">«Переживали, как дети перенесут сафари. Оказалось зря — Александр так увлёк их историями про животных, что они до сих пор рисуют львов. А для нас организовал романтический ужин под звёздами».</div><div class="testimonial-author"><img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Анна"><div class="author-info"><h4>Анна и Дмитрий</h4><p>Санкт-Петербург</p></div></div></div>
+    <div class="container">
+        <h2 class="section-title scroll-animate fade-up">Истории наших путешественников</h2>
+        <p class="section-subtitle scroll-animate fade-up">Те, кто уже открыл для себя AFRICA PRIVÉ</p>
+        <div class="testimonials-grid">
+            <!-- Отзыв 1: Михаил -->
+            <div class="testimonial-card scroll-animate scale">
+                <div class="testimonial-text">«Я думал, что Африка — это палатки и антимоскитные сетки. Оказалось — виллы с бесконечными бассейнами, где на завтрак приносят шампанское. Александр показал ЮАР, которой нет в инстаграме. Теперь только с ним».</div>
+                <div class="testimonial-author">
+                    <div class="testimonial-avatar">
+                        <img src="assets/avatar-mikhail.jpg" alt="Михаил">
+                    </div>
+                    <div class="author-info">
+                        <h4>Михаил</h4>
+                        <p>Основатель IT-компании</p>
+                    </div>
+                </div>
+            </div>
+            <!-- Отзыв 2: Екатерина -->
+            <div class="testimonial-card scroll-animate scale">
+                <div class="testimonial-text">«Это был мой юбилей с подругами. Мы хотели вайб, люкс и фото. Получили в 10 раз больше. Александр знает все лучшие рестораны и секретные локации. Вернёмся через год».</div>
+                <div class="testimonial-author">
+                    <div class="testimonial-avatar">
+                        <img src="assets/avatar-ekaterina.jpg" alt="Екатерина">
+                    </div>
+                    <div class="author-info">
+                        <h4>Екатерина</h4>
+                        <p>Владелица бутика, Москва</p>
+                    </div>
+                </div>
+            </div>
+            <!-- Отзыв 3: Анна и Дмитрий -->
+            <div class="testimonial-card scroll-animate scale">
+                <div class="testimonial-text">«Переживали, как дети перенесут сафари. Оказалось зря — Александр так увлёк их историями про животных, что они до сих пор рисуют львов. А для нас организовал романтический ужин под звёздами».</div>
+                <div class="testimonial-author">
+                    <div class="testimonial-avatar">
+                        <img src="assets/avatar-anna-dmitry.jpg" alt="Анна и Дмитрий">
+                    </div>
+                    <div class="author-info">
+                        <h4>Анна и Дмитрий</h4>
+                        <p>Санкт-Петербург</p>
+                    </div>
+                </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
     <section class="section" id="gallery">
         <div class="container">
