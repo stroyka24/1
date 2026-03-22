@@ -1,0 +1,1282 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>AFRICA PRIVÉ | Экспедиции | Клуб частных путешествий в Африку</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        /* ========== ВСЕ СТИЛИ СОХРАНЯЕМ ИЗ ВАШЕГО ФАЙЛА ========== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: #0F0A0F;
+            color: #D1C4B0;
+            overflow-x: hidden;
+        }
+
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #1E1420; }
+        ::-webkit-scrollbar-thumb { background: #E67E4A; border-radius: 4px; }
+
+        /* Премиальный логотип */
+        .logo {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        .logo-main {
+            font-family: 'Playfair Display', serif;
+            font-size: 28px;
+            font-weight: 800;
+            letter-spacing: 2px;
+            color: #FEF2E0;
+            line-height: 1.1;
+        }
+        .logo-accent {
+            font-family: 'Playfair Display', serif;
+            font-size: 28px;
+            font-weight: 800;
+            letter-spacing: 2px;
+            background: linear-gradient(135deg, #E67E4A 0%, #FF9F6E 50%, #E67E4A 100%);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            line-height: 1.1;
+        }
+        .logo-tagline {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 9px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #9A8C78;
+            margin-top: 4px;
+        }
+        .logo:hover .logo-main { letter-spacing: 3px; text-shadow: 0 0 20px rgba(230,126,74,0.3); }
+        .logo:hover .logo-accent { background-position: 100% 0; animation: gradientShift 0.6s ease forwards; }
+        .logo:hover .logo-tagline { color: #E67E4A; letter-spacing: 3px; }
+        @keyframes gradientShift {
+            0% { background-position: 0% 0; }
+            100% { background-position: 100% 0; }
+        }
+
+        /* Анимации */
+        @keyframes slowZoom { 0% { transform: scale(1.05); } 100% { transform: scale(1.2); } }
+        .scroll-animate { opacity: 0; transition: all 0.8s cubic-bezier(0.2, 0.9, 0.4, 1.1); }
+        .scroll-animate.visible { opacity: 1; transform: translateY(0) translateX(0); }
+        .fade-up { transform: translateY(40px); }
+        .fade-left { transform: translateX(-40px); }
+        .fade-right { transform: translateX(40px); }
+        .scale { transform: scale(0.95); }
+        .visible.fade-up, .visible.fade-left, .visible.fade-right { transform: translate(0); }
+        .visible.scale { transform: scale(1); }
+
+        /* Навигация */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 24px 0;
+            transition: all 0.4s ease;
+            background: transparent;
+        }
+        .navbar.scrolled {
+            background: rgba(15, 10, 15, 0.95);
+            backdrop-filter: blur(12px);
+            padding: 16px 0;
+            border-bottom: 1px solid rgba(230,126,74,0.2);
+        }
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+        .nav-links { display: flex; gap: 40px; align-items: center; }
+        .nav-links a {
+            color: #FEF2E0;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            position: relative;
+        }
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #E67E4A;
+            transition: width 0.3s ease;
+        }
+        .nav-links a:hover::after { width: 100%; }
+        .nav-links a:hover { color: #E67E4A; }
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: #FEF2E0;
+            font-size: 28px;
+            cursor: pointer;
+        }
+
+        /* Hero с параллаксом */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            padding: 120px 24px 80px;
+            overflow: hidden;
+        }
+        .hero-bg-layer {
+            position: absolute;
+            top: -10%;
+            left: -10%;
+            width: 120%;
+            height: 120%;
+            background: linear-gradient(135deg, rgba(15,10,15,0.4) 0%, rgba(15,10,15,0.8) 100%), url('assets/hero-bg.jpg');
+            background-size: cover;
+            background-position: center;
+            z-index: 0;
+            will-change: transform;
+            transition: transform 0.1s ease-out;
+        }
+        .hero-content { position: relative; z-index: 2; max-width: 900px; }
+        .hero-badge {
+            display: inline-block;
+            font-size: 12px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: #E67E4A;
+            background: rgba(230,126,74,0.15);
+            padding: 8px 20px;
+            border-radius: 40px;
+            margin-bottom: 24px;
+            backdrop-filter: blur(8px);
+        }
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 72px;
+            font-weight: 800;
+            letter-spacing: 4px;
+            color: #FEF2E0;
+            margin-bottom: 24px;
+            line-height: 1.2;
+        }
+        .hero p { font-size: 18px; max-width: 600px; margin: 0 auto 32px; color: #D1C4B0; }
+        .hero-buttons { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; }
+
+        /* Кнопки */
+        .btn {
+            display: inline-block;
+            padding: 14px 36px;
+            font-weight: 600;
+            font-size: 14px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            text-decoration: none;
+            border-radius: 40px;
+            transition: all 0.4s ease;
+            cursor: pointer;
+            border: none;
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, #E67E4A 0%, #D45A2A 100%);
+            color: white;
+            box-shadow: 0 4px 20px rgba(230,126,74,0.3);
+        }
+        .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 8px 30px rgba(230,126,74,0.5); }
+        .btn-secondary {
+            background: transparent;
+            border: 1.5px solid #E67E4A;
+            color: #FEF2E0;
+        }
+        .btn-secondary:hover { background: #E67E4A; color: #0F0A0F; transform: translateY(-3px); }
+
+        /* Секции */
+        .section { padding: 100px 0; }
+        .container { max-width: 1280px; margin: 0 auto; padding: 0 24px; }
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 48px;
+            text-align: center;
+            margin-bottom: 16px;
+            color: #FEF2E0;
+        }
+        .section-subtitle {
+            text-align: center;
+            color: #9A8C78;
+            max-width: 700px;
+            margin: 0 auto 60px;
+            font-size: 18px;
+        }
+
+        /* Философия */
+        .philosophy-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+        .philosophy-image {
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+        }
+        .philosophy-image img { width: 100%; height: auto; display: block; transition: transform 0.6s ease; }
+        .philosophy-image:hover img { transform: scale(1.03); }
+        .philosophy-text h3 { font-size: 36px; margin-bottom: 24px; color: #FEF2E0; }
+        .philosophy-text p { margin-bottom: 20px; line-height: 1.7; }
+        .signature {
+            margin-top: 32px;
+            font-style: italic;
+            color: #E67E4A;
+            font-size: 18px;
+            border-left: 2px solid #E67E4A;
+            padding-left: 20px;
+        }
+
+        /* Направления */
+        .destinations-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 32px;
+        }
+        .destination-card {
+            background: rgba(30, 20, 32, 0.6);
+            backdrop-filter: blur(8px);
+            border-radius: 24px;
+            overflow: hidden;
+            border: 1px solid rgba(230,126,74,0.2);
+            transition: all 0.4s ease;
+        }
+        .destination-card:hover {
+            transform: translateY(-10px);
+            border-color: #E67E4A;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+        .destination-image {
+            height: 280px;
+            overflow: hidden;
+        }
+        .destination-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+        .destination-card:hover .destination-image img { transform: scale(1.08); }
+        .destination-content { padding: 28px; }
+        .destination-category {
+            color: #E67E4A;
+            font-size: 12px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+            display: inline-block;
+        }
+        .destination-content h3 { font-size: 24px; margin-bottom: 12px; color: #FEF2E0; }
+        .destination-content p { color: #9A8C78; line-height: 1.6; margin-bottom: 20px; }
+        .destination-link {
+            color: #E67E4A;
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: gap 0.3s ease;
+            cursor: pointer;
+        }
+        .destination-link:hover { gap: 12px; color: #FF9F6E; }
+
+        /* USP */
+        .usp-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 32px;
+            text-align: center;
+        }
+        .usp-item {
+            padding: 32px;
+            background: rgba(30, 20, 32, 0.4);
+            border-radius: 24px;
+            border: 1px solid rgba(230,126,74,0.1);
+            transition: all 0.3s ease;
+        }
+        .usp-item:hover { border-color: rgba(230,126,74,0.4); transform: translateY(-5px); }
+        .usp-icon { font-size: 48px; color: #E67E4A; margin-bottom: 20px; }
+        .usp-item h4 { font-size: 20px; margin-bottom: 12px; color: #FEF2E0; }
+        .usp-item p { font-size: 14px; color: #9A8C78; }
+
+        /* Отзывы */
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 32px;
+        }
+        .testimonial-card {
+            background: rgba(30, 20, 32, 0.6);
+            backdrop-filter: blur(8px);
+            border-radius: 24px;
+            padding: 32px;
+            border: 1px solid rgba(230,126,74,0.2);
+            transition: all 0.3s ease;
+        }
+        .testimonial-card:hover { border-color: #E67E4A; transform: translateY(-5px); }
+        .testimonial-text {
+            font-size: 18px;
+            line-height: 1.6;
+            margin-bottom: 24px;
+            font-style: italic;
+        }
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+        .testimonial-avatar {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            overflow: hidden;
+            background: linear-gradient(135deg, #E67E4A, #B85C2A);
+            box-shadow: 0 4px 15px rgba(230,126,74,0.3);
+            transition: all 0.4s ease;
+            flex-shrink: 0;
+        }
+        .testimonial-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+            display: block;
+        }
+        .testimonial-card:hover .testimonial-avatar {
+            box-shadow: 0 8px 25px rgba(230,126,74,0.5);
+            transform: scale(1.02);
+        }
+        .testimonial-card:hover .testimonial-avatar img {
+            transform: scale(1.08);
+        }
+        .testimonial-card {
+            position: relative;
+        }
+        .testimonial-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-radius: 24px;
+            padding: 1px;
+            background: linear-gradient(135deg, rgba(230,126,74,0), rgba(230,126,74,0.5), rgba(230,126,74,0));
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+        .testimonial-card:hover::after {
+            opacity: 1;
+        }
+        .author-info h4 { font-size: 16px; margin-bottom: 4px; color: #FEF2E0; }
+        .author-info p { font-size: 12px; color: #9A8C78; }
+
+        /* Галерея */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+        .gallery-item {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            cursor: pointer;
+            aspect-ratio: 1;
+        }
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+        .gallery-item:hover img { transform: scale(1.08); }
+        .gallery-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(0deg, rgba(0,0,0,0.7) 0%, transparent 100%);
+            padding: 20px;
+            transform: translateY(100%);
+            transition: transform 0.4s ease;
+        }
+        .gallery-item:hover .gallery-overlay { transform: translateY(0); }
+        .gallery-overlay span { color: #FEF2E0; font-size: 14px; }
+
+        /* Форма с анимацией пингвинов */
+        .form-section {
+            background: linear-gradient(135deg, #1E1420 0%, #0F0A0F 100%);
+            border-top: 1px solid rgba(230,126,74,0.2);
+            border-bottom: 1px solid rgba(230,126,74,0.2);
+            position: relative;
+            overflow: hidden;
+        }
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+        .form-image {
+            border-radius: 24px;
+            overflow: hidden;
+        }
+        .form-image img { width: 100%; height: auto; display: block; }
+        .form-group { margin-bottom: 24px; }
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 16px 20px;
+            background: rgba(30, 20, 32, 0.6);
+            border: 1px solid rgba(230,126,74,0.3);
+            border-radius: 16px;
+            color: #FEF2E0;
+            font-family: 'Montserrat', sans-serif;
+        }
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #E67E4A;
+            box-shadow: 0 0 0 3px rgba(230,126,74,0.2);
+        }
+        .form-group label { display: block; margin-bottom: 8px; color: #D1C4B0; font-size: 14px; }
+
+        /* Анимация следов пингвинов */
+        .penguin-tracks {
+            position: absolute;
+            bottom: 20px;
+            left: 0;
+            width: 100%;
+            height: 80px;
+            pointer-events: none;
+            z-index: 5;
+            overflow: hidden;
+        }
+        .track {
+            position: absolute;
+            bottom: 0;
+            font-size: 28px;
+            opacity: 0;
+            animation: walkAcross 8s linear forwards;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+        }
+        @keyframes walkAcross {
+            0% { left: -50px; opacity: 0; transform: translateY(0) rotate(0deg); }
+            10% { opacity: 0.7; }
+            20% { opacity: 0.9; transform: translateY(-5px) rotate(-3deg); }
+            80% { opacity: 0.9; }
+            90% { opacity: 0.5; transform: translateY(2px) rotate(2deg); }
+            100% { left: calc(100% + 50px); opacity: 0; transform: translateY(0) rotate(0deg); }
+        }
+        .paw-prints {
+            position: absolute;
+            bottom: 10px;
+            left: 0;
+            width: 100%;
+            height: 40px;
+            pointer-events: none;
+            z-index: 4;
+        }
+        .paw {
+            position: absolute;
+            font-size: 18px;
+            opacity: 0;
+            animation: fadePaw 2s ease-out forwards;
+            filter: drop-shadow(0 1px 2px rgba(0,0,0,0.2));
+        }
+        @keyframes fadePaw {
+            0% { opacity: 0; transform: scale(0.5) rotate(-10deg); }
+            30% { opacity: 0.6; }
+            70% { opacity: 0.4; }
+            100% { opacity: 0; transform: scale(1.2) rotate(10deg); }
+        }
+
+        /* Кнопка звука */
+        .sound-toggle {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 1000;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: rgba(30, 20, 32, 0.8);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(230,126,74,0.5);
+            color: #E67E4A;
+            font-size: 24px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+        .sound-toggle:hover {
+            transform: scale(1.1);
+            background: #E67E4A;
+            color: #0F0A0F;
+            border-color: #E67E4A;
+        }
+
+        /* ========== МОДАЛЬНОЕ ОКНО ДЛЯ ТУРОВ ========== */
+        .tour-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.95);
+            z-index: 3000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.4s ease;
+        }
+        .tour-modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        .tour-modal-content {
+            max-width: 600px;
+            width: 90%;
+            background: linear-gradient(135deg, #1E1420, #0F0A0F);
+            border-radius: 32px;
+            padding: 40px;
+            border: 1px solid rgba(230,126,74,0.3);
+            position: relative;
+            transform: scale(0.9);
+            transition: transform 0.4s ease;
+        }
+        .tour-modal.active .tour-modal-content {
+            transform: scale(1);
+        }
+        .tour-modal-close {
+            position: absolute;
+            top: 20px;
+            right: 25px;
+            font-size: 32px;
+            color: #9A8C78;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+        .tour-modal-close:hover {
+            color: #E67E4A;
+            transform: rotate(90deg);
+        }
+        .tour-modal-icon {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+        .tour-modal h3 {
+            font-size: 32px;
+            color: #FEF2E0;
+            margin-bottom: 20px;
+        }
+        .tour-modal p {
+            color: #D1C4B0;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+        .tour-modal-features {
+            margin: 20px 0;
+            padding-left: 20px;
+        }
+        .tour-modal-features li {
+            color: #9A8C78;
+            margin-bottom: 8px;
+        }
+        .tour-modal-btn {
+            margin-top: 25px;
+            width: 100%;
+        }
+
+        /* Футер */
+        .footer {
+            background: #1E1420;
+            padding: 60px 0 30px;
+            border-top: 1px solid rgba(230,126,74,0.2);
+        }
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        .footer-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 28px;
+            font-weight: 700;
+            text-decoration: none;
+            color: #FEF2E0;
+            display: inline-block;
+            margin-bottom: 16px;
+        }
+        .footer-logo span { color: #E67E4A; }
+        .footer-about p { color: #9A8C78; line-height: 1.6; }
+        .footer h4 { font-size: 18px; margin-bottom: 20px; color: #FEF2E0; }
+        .footer-links a {
+            display: block;
+            color: #9A8C78;
+            text-decoration: none;
+            margin-bottom: 12px;
+            transition: color 0.3s ease;
+        }
+        .footer-links a:hover { color: #E67E4A; }
+        .social-links {
+            display: flex;
+            gap: 16px;
+            margin-top: 20px;
+        }
+        .social-links a {
+            color: #9A8C78;
+            font-size: 20px;
+            transition: color 0.3s ease;
+        }
+        .social-links a:hover { color: #E67E4A; transform: translateY(-3px); }
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(230,126,74,0.2);
+            color: #9A8C78;
+            font-size: 14px;
+        }
+
+        /* Модальное окно галереи */
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.9);
+            z-index: 2000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+        .modal.active { opacity: 1; visibility: visible; }
+        .modal img { max-width: 90%; max-height: 90%; object-fit: contain; }
+        .modal-close {
+            position: absolute;
+            top: 30px;
+            right: 40px;
+            color: white;
+            font-size: 40px;
+            cursor: pointer;
+        }
+        .modal-close:hover { color: #E67E4A; transform: rotate(90deg); }
+
+        /* Мобильное меню */
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 280px;
+            height: 100vh;
+            background: #0F0A0F;
+            z-index: 1001;
+            padding: 100px 40px;
+            transition: right 0.4s ease;
+            box-shadow: -5px 0 30px rgba(0,0,0,0.5);
+        }
+        .mobile-menu.active { right: 0; }
+        .mobile-menu a {
+            display: block;
+            color: #FEF2E0;
+            text-decoration: none;
+            font-size: 18px;
+            margin-bottom: 30px;
+        }
+        .mobile-menu a:hover { color: #E67E4A; }
+
+        /* Адаптация */
+        @media (max-width: 992px) {
+            .hero h1 { font-size: 48px; }
+            .section-title { font-size: 36px; }
+            .philosophy-grid, .destinations-grid, .testimonials-grid, .usp-grid, .form-grid, .footer-grid, .gallery-grid {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+            .nav-links { display: none; }
+            .mobile-menu-btn { display: block; }
+            .usp-grid { grid-template-columns: repeat(2, 1fr); }
+            .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+            .logo-main, .logo-accent { font-size: 22px; }
+            .logo-tagline { font-size: 7px; }
+        }
+        @media (max-width: 768px) {
+            .section { padding: 60px 0; }
+            .hero h1 { font-size: 36px; }
+            .usp-grid { grid-template-columns: 1fr; }
+            .gallery-grid { grid-template-columns: 1fr; }
+            .testimonial-avatar { width: 52px; height: 52px; }
+            .testimonial-text { font-size: 16px; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <span class="logo-main">AFRICA</span>
+                <span class="logo-accent">PRIVÉ</span>
+                <span class="logo-tagline">Клуб частных путешествий</span>
+            </a>
+            <div class="nav-links">
+                <a href="#philosophy">Философия</a>
+                <a href="#destinations">Направления</a>
+                <a href="#usp">Преимущества</a>
+                <a href="#testimonials">Отзывы</a>
+                <a href="#gallery">Галерея</a>
+                <a href="#form">Запрос</a>
+            </div>
+            <button class="mobile-menu-btn" id="mobileMenuBtn">☰</button>
+        </div>
+    </nav>
+
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="#philosophy">Философия</a>
+        <a href="#destinations">Направления</a>
+        <a href="#usp">Преимущества</a>
+        <a href="#testimonials">Отзывы</a>
+        <a href="#gallery">Галерея</a>
+        <a href="#form">Запрос</a>
+    </div>
+
+    <!-- Кнопка включения звука -->
+    <div class="sound-toggle" id="soundToggle">
+        <i class="fas fa-volume-mute" id="soundIcon"></i>
+    </div>
+
+    <!-- Hero с параллаксом -->
+    <section class="hero" id="hero">
+        <div class="hero-bg-layer" id="heroBg"></div>
+        <div class="hero-content">
+            <div class="hero-badge scroll-animate fade-up">AFRICA PRIVÉ • ЭКСПЕДИЦИИ</div>
+            <h1 class="scroll-animate fade-up">Ваша экспедиция<br>начинается здесь</h1>
+            <p class="scroll-animate fade-up">Не просто путешествие. Личное приглашение в мир, скрытый от посторонних глаз. Там, где саванна встречается с океаном, а закаты становятся частью вас.</p>
+            <div class="hero-buttons scroll-animate fade-up">
+                <a href="#form" class="btn btn-primary">Создать маршрут</a>
+                <a href="#destinations" class="btn btn-secondary">Исследовать направления</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="philosophy">
+        <div class="container">
+            <div class="philosophy-grid">
+                <div class="philosophy-image scroll-animate fade-right">
+                    <img src="assets/guide.jpg" alt="Сафари гид" onerror="this.src='https://placehold.co/800x600/1E1420/E67E4A?text=Guide+Photo'">
+                </div>
+                <div class="philosophy-text scroll-animate fade-left">
+                    <h3>Привилегия подлинной Африки</h3>
+                    <p>AFRICA PRIVÉ — это не туры. Это доступ к Африке, которую не показывают в открытых источниках. Частные лоджи, закрытые заповедники, вертолётные сафари и закаты, которые меняют вас навсегда.</p>
+                    <p>15 лет назад я прилетел в Кейптаун на неделю — и не смог улететь обратно месяц. Африка не показывает себя туристам из автобусов. Она открывается тем, кто готов выехать на рассвете, пробовать устриц там, где их только что поймали, и разговаривать с местными старейшинами на их языке.</p>
+                    <p>Сегодня я провёл более 100 экспедиций. Я знаю, где живёт прайд с самым фотогеничным львом, в какой бухте киты подплывают ближе всего, и в каком подвале Стелленбоса хранят вино 20-летней выдержки.</p>
+                    <div class="signature">— Александр, основатель AFRICA PRIVÉ</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="destinations">
+        <div class="container">
+            <h2 class="section-title scroll-animate fade-up">Выберите своё приключение</h2>
+            <p class="section-subtitle scroll-animate fade-up">Каждое путешествие создаётся индивидуально, но вот наши главные направления</p>
+            <div class="destinations-grid">
+                <div class="destination-card scroll-animate scale">
+                    <div class="destination-image"><img src="assets/safari.jpg" alt="Сафари" onerror="this.src='https://placehold.co/800x600/1E1420/E67E4A?text=Safari'"></div>
+                    <div class="destination-content">
+                        <span class="destination-category">Роскошное сафари</span>
+                        <h3>Голос саванны</h3>
+                        <p>Рассвет в национальном парке Крюгера. Кофе с видом на прайд. Здесь Большая пятёрка выходит на свидание без грима.</p>
+                        <a href="#" class="destination-link" data-tour="safari">Узнать подробнее →</a>
+                    </div>
+                </div>
+                <div class="destination-card scroll-animate scale">
+                    <div class="destination-image"><img src="assets/wine.jpg" alt="Винный тур" onerror="this.src='https://placehold.co/800x600/1E1420/E67E4A?text=Wine+Tour'"></div>
+                    <div class="destination-content">
+                        <span class="destination-category">Гастро-туры</span>
+                        <h3>Вкус Винных дорог</h3>
+                        <p>Стелленбос и Франсхук. Дегустации в поместьях, куда не водят туристов. Ужин среди бочек с виноделом в пятом поколении.</p>
+                        <a href="#" class="destination-link" data-tour="wine">Узнать подробнее →</a>
+                    </div>
+                </div>
+                <div class="destination-card scroll-animate scale">
+                    <div class="destination-image"><img src="assets/ocean.jpg" alt="Океанская экспедиция" onerror="this.src='https://placehold.co/800x600/1E1420/E67E4A?text=Ocean+Expedition'"></div>
+                    <div class="destination-content">
+                        <span class="destination-category">Океанские экспедиции</span>
+                        <h3>На краю света</h3>
+                        <p>Мыс Доброй Надежды, где два океана целуются. Пингвины в смокингах и дорога, от которой захватывает дух.</p>
+                        <a href="#" class="destination-link" data-tour="ocean">Узнать подробнее →</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="usp">
+        <div class="container">
+            <h2 class="section-title scroll-animate fade-up">Почему AFRICA PRIVÉ</h2>
+            <p class="section-subtitle scroll-animate fade-up">То, что отличает нас от других</p>
+            <div class="usp-grid">
+                <div class="usp-item scroll-animate scale"><div class="usp-icon">🚁</div><h4>Вертолётные сафари</h4><p>Увидеть Большую пятёрку с высоты птичьего полёта</p></div>
+                <div class="usp-item scroll-animate scale"><div class="usp-icon">🏕️</div><h4>Закрытые заповедники</h4><p>Доступ в места, куда не пускают туристические группы</p></div>
+                <div class="usp-item scroll-animate scale"><div class="usp-icon">👤</div><h4>Персональный гид</h4><p>С вами на протяжении всего путешествия</p></div>
+                <div class="usp-item scroll-animate scale"><div class="usp-icon">🍷</div><h4>Эксклюзивные дегустации</h4><p>Винные подвалы, закрытые для широкой публики</p></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="testimonials">
+        <div class="container">
+            <h2 class="section-title scroll-animate fade-up">Истории наших путешественников</h2>
+            <p class="section-subtitle scroll-animate fade-up">Те, кто уже открыл для себя AFRICA PRIVÉ</p>
+            <div class="testimonials-grid">
+                <div class="testimonial-card scroll-animate scale">
+                    <div class="testimonial-text">«Я думал, что Африка — это палатки и антимоскитные сетки. Оказалось — виллы с бесконечными бассейнами, где на завтрак приносят шампанское. Александр показал ЮАР, которой нет в инстаграме. Теперь только с ним».</div>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar">
+                            <img src="assets/avatar-mikhail.jpg" alt="Михаил" onerror="this.style.display='none'; this.parentElement.style.background='linear-gradient(135deg, #E67E4A, #B85C2A)'; this.parentElement.innerHTML='М'">
+                        </div>
+                        <div class="author-info">
+                            <h4>Михаил</h4>
+                            <p>Основатель IT-компании</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card scroll-animate scale">
+                    <div class="testimonial-text">«Это был мой юбилей с подругами. Мы хотели вайб, люкс и фото. Получили в 10 раз больше. Александр знает все лучшие рестораны и секретные локации. Вернёмся через год».</div>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar">
+                            <img src="assets/avatar-ekaterina.jpg" alt="Екатерина" onerror="this.style.display='none'; this.parentElement.style.background='linear-gradient(135deg, #E67E4A, #B85C2A)'; this.parentElement.innerHTML='Е'">
+                        </div>
+                        <div class="author-info">
+                            <h4>Екатерина</h4>
+                            <p>Владелица бутика, Москва</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card scroll-animate scale">
+                    <div class="testimonial-text">«Переживали, как дети перенесут сафари. Оказалось зря — Александр так увлёк их историями про животных, что они до сих пор рисуют львов. А для нас организовал романтический ужин под звёздами».</div>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar">
+                            <img src="assets/avatar-anna-dmitry.jpg" alt="Анна и Дмитрий" onerror="this.style.display='none'; this.parentElement.style.background='linear-gradient(135deg, #E67E4A, #B85C2A)'; this.parentElement.innerHTML='А'">
+                        </div>
+                        <div class="author-info">
+                            <h4>Анна и Дмитрий</h4>
+                            <p>Санкт-Петербург</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="gallery">
+        <div class="container">
+            <h2 class="section-title scroll-animate fade-up">Моменты, которые остаются с вами</h2>
+            <p class="section-subtitle scroll-animate fade-up">Взгляд на Африку через объектив</p>
+            <div class="gallery-grid">
+                <div class="gallery-item scroll-animate scale" data-modal="assets/gallery1.jpg"><img src="assets/gallery1.jpg" alt="Киты" onerror="this.src='https://placehold.co/600x600/1E1420/E67E4A?text=Gallery+1'"><div class="gallery-overlay"><span>Киты</span></div></div>
+                <div class="gallery-item scroll-animate scale" data-modal="assets/gallery2.jpg"><img src="assets/gallery2.jpg" alt="Закат" onerror="this.src='https://placehold.co/600x600/1E1420/E67E4A?text=Gallery+2'"><div class="gallery-overlay"><span>Закат</span></div></div>
+                <div class="gallery-item scroll-animate scale" data-modal="assets/gallery3.jpg"><img src="assets/gallery3.jpg" alt="Водопады" onerror="this.src='https://placehold.co/600x600/1E1420/E67E4A?text=Gallery+3'"><div class="gallery-overlay"><span>Водопады</span></div></div>
+                <div class="gallery-item scroll-animate scale" data-modal="assets/gallery4.jpg"><img src="assets/gallery4.jpg" alt="Пингвины" onerror="this.src='https://placehold.co/600x600/1E1420/E67E4A?text=Gallery+4'"><div class="gallery-overlay"><span>Пингвины</span></div></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="form-section section" id="form">
+        <div class="container">
+            <div class="penguin-tracks" id="penguinTracks"></div>
+            <div class="paw-prints" id="pawPrints"></div>
+            
+            <div class="form-grid">
+                <div class="form-image scroll-animate fade-right">
+                    <img src="assets/suitcase2.jpg" alt="Соберите свой чемодан" onerror="this.src='https://placehold.co/800x600/1E1420/E67E4A?text=Pack+Your+Dreams'">
+                </div>
+                <div class="scroll-animate fade-left">
+                    <h2 class="section-title" style="text-align: left;">Соберите свой чемодан приключений</h2>
+                    <p style="margin-bottom: 32px;">Расскажите нам о своих мечтах — и мы сконструируем маршрут, который подойдёт именно вам. Никаких шаблонов. Только то, что любите вы.</p>
+                    <form id="expeditionForm">
+                        <div class="form-group"><label>Ваше имя</label><input type="text" id="userName" placeholder="Как к вам обращаться?" required></div>
+                        <div class="form-group"><label>Telegram / WhatsApp</label><input type="text" id="userContact" placeholder="Ссылка или номер для связи" required></div>
+                        <div class="form-group"><label>Куда хотите?</label><select id="userDestination"><option>Сафари (Крюгер, Ботсвана)</option><option>Океан и мысы</option><option>Наблюдение за китами</option><option>Винные дороги</option><option>Всё сразу</option></select></div>
+                        <div class="form-group"><label>Ваш ритм путешествия</label><select id="userPace"><option>Релакс и роскошь</option><option>Активный и насыщенный</option><option>Экстремальный (вертолёты, трекинг)</option></select></div>
+                        <div class="form-group"><label>Пожелания и комментарии</label><textarea id="userMessage" rows="3" placeholder="Расскажите о ваших мечтах..."></textarea></div>
+                        <button type="submit" class="btn btn-primary" style="width: 100%;">Получить индивидуальный маршрут</button>
+                        <p style="font-size: 12px; text-align: center; margin-top: 16px; color: #9A8C78;">Ответим в течение 24 часов</p>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-about"><a href="index.html" class="footer-logo">AFRICA <span>PRIVÉ</span></a><p>Клуб частных путешествий в Африку. Создаём экспедиции, которые остаются с вами навсегда.</p><div class="social-links"><a href="#"><i class="fab fa-instagram"></i></a><a href="#"><i class="fab fa-telegram"></i></a><a href="#"><i class="far fa-envelope"></i></a></div></div>
+                <div class="footer-links"><h4>Навигация</h4><a href="#philosophy">Философия</a><a href="#destinations">Направления</a><a href="#testimonials">Отзывы</a><a href="#form">Создать тур</a></div>
+                <div class="footer-links"><h4>Направления</h4><a href="#">Сафари</a><a href="#">Винные туры</a><a href="#">Океанские экспедиции</a><a href="#">Наблюдение за китами</a></div>
+                <div class="footer-links"><h4>Контакты</h4><a href="#">Phone: +7 909 261 00 99</a><a href="#">Telegram: @africa_prive</a><a href="#">Email: hello@africaprive.com</a></div>
+            </div>
+            <div class="footer-bottom"><p>© 2026 AFRICA PRIVÉ — Клуб частных путешествий в Африку. Все права защищены.</p></div>
+        </div>
+    </footer>
+
+    <!-- Модальное окно для галереи -->
+    <div class="modal" id="imageModal"><span class="modal-close">&times;</span><img id="modalImage" src="" alt="Full size"></div>
+
+    <!-- Модальные окна для туров -->
+    <div class="tour-modal" id="tourModal">
+        <div class="tour-modal-content">
+            <span class="tour-modal-close">&times;</span>
+            <div class="tour-modal-icon" id="tourModalIcon">🏜️</div>
+            <h3 id="tourModalTitle">Голос саванны</h3>
+            <p id="tourModalDesc">Рассвет в национальном парке Крюгера. Кофе с видом на прайд. Здесь Большая пятёрка выходит на свидание без грима.</p>
+            <ul class="tour-modal-features" id="tourModalFeatures">
+                <li>✨ Частный гид-натуралист</li>
+                <li>🚁 Вертолётная прогулка над саванной</li>
+                <li>🏕️ Роскошный лагерь с видом на водопой</li>
+                <li>🍷 Завтрак на закате с шампанским</li>
+            </ul>
+            <a href="#form" class="btn btn-primary tour-modal-btn">Забронировать этот тур →</a>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // ========== НАВИГАЦИЯ ==========
+            window.addEventListener('scroll', () => {
+                const navbar = document.getElementById('navbar');
+                if (window.scrollY > 50) navbar.classList.add('scrolled');
+                else navbar.classList.remove('scrolled');
+            });
+
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                });
+            });
+
+            const mobileBtn = document.getElementById('mobileMenuBtn');
+            const mobileMenu = document.getElementById('mobileMenu');
+            if (mobileBtn) {
+                mobileBtn.addEventListener('click', () => mobileMenu.classList.toggle('active'));
+                document.querySelectorAll('.mobile-menu a').forEach(link => {
+                    link.addEventListener('click', () => mobileMenu.classList.remove('active'));
+                });
+            }
+
+            // ========== АНИМАЦИЯ ПРИ СКРОЛЛЕ ==========
+            const animateElements = document.querySelectorAll('.scroll-animate');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
+            }, { threshold: 0.1 });
+            animateElements.forEach(el => observer.observe(el));
+
+            // ========== ГАЛЕРЕЯ ==========
+            const modal = document.getElementById('imageModal');
+            const modalImg = document.getElementById('modalImage');
+            const modalClose = document.querySelector('.modal-close');
+            document.querySelectorAll('.gallery-item').forEach(item => {
+                item.addEventListener('click', () => {
+                    const imgSrc = item.getAttribute('data-modal');
+                    if (imgSrc) { modalImg.src = imgSrc; modal.classList.add('active'); }
+                });
+            });
+            modalClose?.addEventListener('click', () => modal.classList.remove('active'));
+            modal?.addEventListener('click', (e) => { if (e.target === modal) modal.classList.remove('active'); });
+
+            // ========== МОДАЛЬНЫЕ ОКНА ДЛЯ ТУРОВ ==========
+            const tourModal = document.getElementById('tourModal');
+            const tourModalClose = document.querySelector('.tour-modal-close');
+            const tourModalTitle = document.getElementById('tourModalTitle');
+            const tourModalDesc = document.getElementById('tourModalDesc');
+            const tourModalIcon = document.getElementById('tourModalIcon');
+            const tourModalFeatures = document.getElementById('tourModalFeatures');
+            const tourModalBtn = document.querySelector('.tour-modal-btn');
+
+            const tourData = {
+                safari: {
+                    icon: '🏜️',
+                    title: 'Голос саванны',
+                    desc: 'Рассвет в национальном парке Крюгера. Кофе с видом на прайд. Здесь Большая пятёрка выходит на свидание без грима.',
+                    features: ['✨ Частный гид-натуралист', '🚁 Вертолётная прогулка над саванной', '🏕️ Роскошный лагерь с видом на водопой', '🍷 Завтрак на закате с шампанским']
+                },
+                wine: {
+                    icon: '🍷',
+                    title: 'Вкус Винных дорог',
+                    desc: 'Стелленбос и Франсхук. Дегустации в поместьях, куда не водят туристов. Ужин среди бочек с виноделом в пятом поколении.',
+                    features: ['🍇 Эксклюзивные дегустации в частных поместьях', '🍽️ Ужин с виноделом в подвале 200-летней выдержки', '🚗 Личный трансфер на электромобиле', '📸 Фотосессия на виноградниках на закате']
+                },
+                ocean: {
+                    icon: '🌊',
+                    title: 'На краю света',
+                    desc: 'Мыс Доброй Надежды, где два океана целуются. Пингвины в смокингах и дорога, от которой захватывает дух.',
+                    features: ['🐧 Посечение колонии пингвинов в Боулдерс-Бич', '🌊 Прогулка до маяка на мысе Доброй Надежды', '🚁 Полет над двумя океанами', '🍽️ Обед с видом на океан в ресторане уровня Michelin']
+                }
+            };
+
+            document.querySelectorAll('.destination-link').forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const tourType = link.getAttribute('data-tour');
+                    const data = tourData[tourType];
+                    if (data) {
+                        tourModalIcon.textContent = data.icon;
+                        tourModalTitle.textContent = data.title;
+                        tourModalDesc.textContent = data.desc;
+                        tourModalFeatures.innerHTML = data.features.map(f => `<li>${f}</li>`).join('');
+                        tourModal.classList.add('active');
+                    }
+                });
+            });
+
+            tourModalClose?.addEventListener('click', () => tourModal.classList.remove('active'));
+            tourModal?.addEventListener('click', (e) => { if (e.target === tourModal) tourModal.classList.remove('active'); });
+            
+            tourModalBtn?.addEventListener('click', (e) => {
+                tourModal.classList.remove('active');
+                document.getElementById('form').scrollIntoView({ behavior: 'smooth' });
+            });
+
+            // ========== ПАРАЛЛАКС ЭФФЕКТ ==========
+            const heroBg = document.getElementById('heroBg');
+            if (heroBg) {
+                window.addEventListener('scroll', () => {
+                    const scrolled = window.scrollY;
+                    const speed = 0.3;
+                    heroBg.style.transform = `translateY(${scrolled * speed}px)`;
+                });
+            }
+
+            // ========== АНИМАЦИЯ СЛЕДОВ ПИНГВИНОВ ==========
+            let isFormVisible = false;
+            let trackInterval, pawInterval;
+            
+            function createPenguinTrack() {
+                const tracksContainer = document.getElementById('penguinTracks');
+                if (!tracksContainer || !isFormVisible) return;
+                const track = document.createElement('div');
+                track.className = 'track';
+                track.textContent = '🐧';
+                const randomY = Math.random() * 40 - 20;
+                track.style.bottom = randomY + 'px';
+                const duration = Math.random() * 4 + 6;
+                const delay = Math.random() * 15;
+                track.style.animationDuration = duration + 's';
+                track.style.animationDelay = delay + 's';
+                tracksContainer.appendChild(track);
+                setTimeout(() => { if (track && track.parentNode) track.remove(); }, (duration + delay) * 1000);
+            }
+            
+            function createPawPrint() {
+                const pawsContainer = document.getElementById('pawPrints');
+                if (!pawsContainer || !isFormVisible) return;
+                const paw = document.createElement('div');
+                paw.className = 'paw';
+                const pawSymbols = ['🐾', '🦶', '🐧', '❄️'];
+                paw.textContent = pawSymbols[Math.floor(Math.random() * pawSymbols.length)];
+                paw.style.left = Math.random() * 100 + '%';
+                paw.style.bottom = Math.random() * 50 + 'px';
+                const duration = Math.random() * 2 + 1.5;
+                const delay = Math.random() * 8;
+                paw.style.animationDuration = duration + 's';
+                paw.style.animationDelay = delay + 's';
+                pawsContainer.appendChild(paw);
+                setTimeout(() => { if (paw && paw.parentNode) paw.remove(); }, (duration + delay) * 1000);
+            }
+            
+            const formSection = document.getElementById('form');
+            const checkFormVisibility = () => {
+                if (formSection) {
+                    const rect = formSection.getBoundingClientRect();
+                    isFormVisible = rect.top < window.innerHeight && rect.bottom > 0;
+                }
+            };
+            
+            window.addEventListener('scroll', () => {
+                checkFormVisibility();
+                if (isFormVisible && !trackInterval) {
+                    trackInterval = setInterval(createPenguinTrack, 4000);
+                    pawInterval = setInterval(createPawPrint, 1200);
+                } else if (!isFormVisible && trackInterval) {
+                    clearInterval(trackInterval);
+                    clearInterval(pawInterval);
+                    trackInterval = null;
+                    pawInterval = null;
+                }
+            });
+            
+            checkFormVisibility();
+            if (isFormVisible) {
+                trackInterval = setInterval(createPenguinTrack, 4000);
+                pawInterval = setInterval(createPawPrint, 1200);
+            }
+            
+            // ========== TELEGRAM УВЕДОМЛЕНИЯ ==========
+            const BOT_TOKEN = '8570006349:AAHcdJ8vgoRj8qfxzL1DeQtV-O5-Fm9M3bA'; // Замените на токен вашего бота
+            const CHAT_ID = '@NewshowNews';     // Замените на ваш chat_id
+            
+            const expeditionForm = document.getElementById('expeditionForm');
+            if (expeditionForm) {
+                expeditionForm.addEventListener('submit', async (e) => {
+                    e.preventDefault();
+                    
+                    const name = document.getElementById('userName')?.value || '';
+                    const contact = document.getElementById('userContact')?.value || '';
+                    const destination = document.getElementById('userDestination')?.value || '';
+                    const pace = document.getElementById('userPace')?.value || '';
+                    const message = document.getElementById('userMessage')?.value || '';
+                    
+                    const text = `🦁 НОВАЯ ЗАЯВКА AFRICA PRIVÉ 🦁\n\n👤 Имя: ${name}\n📱 Контакт: ${contact}\n🌍 Направление: ${destination}\n⚡ Ритм: ${pace}\n💭 Пожелания: ${message || '—'}\n\n🔗 Отправлено с сайта expedition.html`;
+                    
+                    if (BOT_TOKEN !== 'YOUR_BOT_TOKEN' && CHAT_ID !== 'YOUR_CHAT_ID') {
+                        try {
+                            const response = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
+                                method: 'POST',
+                                headers: { 'Content-Type': 'application/json' },
+                                body: JSON.stringify({ chat_id: CHAT_ID, text: text, parse_mode: 'HTML' })
+                            });
+                            if (response.ok) {
+                                alert('✅ Заявка отправлена! Мы свяжемся с вами в ближайшие 24 часа.');
+                                expeditionForm.reset();
+                            } else {
+                                alert('❌ Ошибка отправки. Попробуйте позже или напишите нам в Telegram.');
+                            }
+                        } catch (error) {
+                            console.error('Ошибка:', error);
+                            alert('❌ Ошибка отправки. Попробуйте позже или напишите нам в Telegram.');
+                        }
+                    } else {
+                        alert('✅ Спасибо! Мы свяжемся с вами в ближайшие 24 часа, чтобы создать ваш идеальный маршрут.');
+                        expeditionForm.reset();
+                    }
+                });
+            }
+            
+            // ========== ЗВУК ==========
+            let audioContext = null;
+            let isSoundEnabled = false;
+            let ambianceBuffer = null;
+            let currentAmbiance = null;
+            
+            const soundToggle = document.getElementById('soundToggle');
+            const soundIcon = document.getElementById('soundIcon');
+            
+            async function loadAmbiance() {
+                const response = await fetch('assets/ambiance.mp3');
+                const arrayBuffer = await response.arrayBuffer();
+                return await audioContext.decodeAudioData(arrayBuffer);
+            }
+            
+            function createFallbackAmbiance() {
+                const duration = 4;
+                const sampleRate = audioContext.sampleRate;
+                const frameCount = duration * sampleRate;
+                const buffer = audioContext.createBuffer(2, frameCount, sampleRate);
+                for (let channel = 0; channel < 2; channel++) {
+                    const channelData = buffer.getChannelData(channel);
+                    for (let i = 0; i < frameCount; i++) {
+                        const t = i / sampleRate;
+                        let wind = Math.sin(t * 0.5) * 0.1 + Math.sin(t * 0.8) * 0.05;
+                        let distant = Math.sin(t * 0.2) * 0.03;
+                        let noise = (Math.random() - 0.5) * 0.02;
+                        channelData[i] = (wind + distant + noise) * 0.5;
+                    }
+                }
+                return buffer;
+            }
+            
+            async function initAudio() {
+                if (audioContext) return;
+                audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                try {
+                    ambianceBuffer = await loadAmbiance();
+                } catch (error) {
+                    ambianceBuffer = createFallbackAmbiance();
+                }
+            }
+            
+            function playAmbiance() {
+                if (!audioContext || !isSoundEnabled || currentAmbiance) return;
+                currentAmbiance = audioContext.createBufferSource();
+                currentAmbiance.buffer = ambianceBuffer;
+                currentAmbiance.loop = true;
+                currentAmbiance.connect(audioContext.destination);
+                currentAmbiance.start();
+            }
+            
+            function stopAmbiance() {
+                if (currentAmbiance) {
+                    currentAmbiance.stop();
+                    currentAmbiance = null;
+                }
+            }
+            
+            soundToggle.addEventListener('click', async () => {
+                if (!audioContext) {
+                    await initAudio();
+                    await audioContext.resume();
+                    isSoundEnabled = true;
+                    soundIcon.className = 'fas fa-volume-up';
+                    playAmbiance();
+                } else if (isSoundEnabled) {
+                    isSoundEnabled = false;
+                    soundIcon.className = 'fas fa-volume-mute';
+                    stopAmbiance();
+                } else {
+                    await audioContext.resume();
+                    isSoundEnabled = true;
+                    soundIcon.className = 'fas fa-volume-up';
+                    playAmbiance();
+                }
+            });
+        });
+    </script>
+</body>
+</html>
