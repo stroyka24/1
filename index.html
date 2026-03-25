@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Вадим Козловцев | Художественная мастерская в Туле</title>
+    <meta name="description" content="Художник Вадим Козловцев (Третьяков). Портреты маслом на холсте по фото. Мастерская в Туле. Доставка по России.">
+    <!-- Font Awesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Swiper JS CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(135deg, #0f0f12 0%, #1a181c 50%, #131215 100%);
+            color: #ece8e0;
+            font-family: 'Poppins', 'Segoe UI', system-ui, -apple-system, sans-serif;
+            line-height: 1.5;
+            scroll-behavior: smooth;
+        }
+
+        .container {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 32px;
+            flex-wrap: wrap;
+            background: linear-gradient(135deg, rgba(10,8,12,0.92) 0%, rgba(25,20,28,0.95) 100%);
+            backdrop-filter: blur(12px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid rgba(201, 170, 111, 0.3);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+            gap: 16px;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            background: linear-gradient(135deg, #f3e7c0, #dbb87c, #c9aa6f);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .logo span {
+            font-size: 0.75rem;
+            display: block;
+            background: linear-gradient(135deg, #b8a06e, #9e8a60);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: #e0d4c0;
+            text-decoration: none;
+            font-weight: 500;
+            transition: 0.3s;
+            font-size: 1.1rem;
+            position: relative;
+        }
+
+        .nav-links a.active, .nav-links a:hover {
+            color: #e6c384;
+            text-shadow: 0 0 8px rgba(230,195,132,0.3);
+        }
+        
+        .nav-links a.active::after, .nav-links a:hover::after {
+            content: '';
+            position: absolute;
+            bottom: -6px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, #e6c384, #c9aa6f);
+            border-radius: 2px;
+        }
+
+        .header-contacts {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            background: rgba(201,170,111,0.12);
+            padding: 8px 18px;
+            border-radius: 50px;
+            border: 1px solid rgba(201,170,111,0.3);
+        }
+        .header-contacts a {
+            color: #e6c384;
+            text-decoration: none;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: 0.2s;
+        }
+        .header-contacts a:hover {
+            color: #f3dfaa;
+        }
+        .header-contacts i {
+            font-size: 1rem;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 70px 20px 50px;
+            background: radial-gradient(circle at 70% 20%, rgba(201,170,111,0.08), transparent 70%);
+        }
+
+        .hero h1 {
+            font-size: 3.2rem;
+            font-weight: 600;
+            letter-spacing: -0.5px;
+            background: linear-gradient(135deg, #f5edda, #e6cf9e, #dbb87c);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .hero p {
+            color: #cfc5aa;
+            margin-top: 16px;
+            font-size: 1.2rem;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            margin-bottom: 32px;
+            background: linear-gradient(90deg, #e6cfa2, #c9aa6f);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            border-left: 4px solid #c9aa6f;
+            padding-left: 20px;
+            font-weight: 500;
+        }
+
+        .bio-with-frame {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            align-items: flex-start;
+            background: linear-gradient(135deg, #141217 0%, #1e1b22 100%);
+            border-radius: 32px;
+            border: 1px solid rgba(201, 170, 111, 0.25);
+            overflow: hidden;
+            box-shadow: 0 25px 40px -15px rgba(0,0,0,0.5);
+        }
+
+        .bio-text {
+            flex: 2;
+            padding: 36px 28px 36px 36px;
+        }
+
+        .bio-text h3 {
+            font-size: 1.9rem;
+            margin-bottom: 24px;
+            background: linear-gradient(135deg, #f0e5ce, #dbb87c);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .bio-text p {
+            margin-bottom: 18px;
+            color: #dbd2bf;
+            line-height: 1.6;
+        }
+        
+        .artist-quote {
+            font-style: italic;
+            border-left: 3px solid #c9aa6f;
+            padding-left: 20px;
+            margin: 20px 0;
+            color: #e0cfb0;
+        }
+
+        .artist-frame {
+            flex: 1;
+            padding: 36px 36px 36px 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .gallery-frame {
+            background: linear-gradient(145deg, #2c261c, #1f1b14);
+            padding: 14px 14px 18px 14px;
+            border-radius: 8px;
+            box-shadow: 0 20px 30px -8px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,215,150,0.2);
+            position: relative;
+        }
+        .gallery-frame::before {
+            content: "";
+            position: absolute;
+            top: 6px;
+            left: 6px;
+            right: 6px;
+            bottom: 6px;
+            border: 1px solid rgba(201, 170, 111, 0.4);
+            pointer-events: none;
+            border-radius: 4px;
+        }
+        .gallery-frame img {
+            display: block;
+            width: 100%;
+            max-width: 280px;
+            height: auto;
+            object-fit: cover;
+            border-radius: 4px;
+            transition: transform 0.4s ease;
+        }
+        .gallery-frame:hover img {
+            transform: scale(1.02);
+        }
+        .frame-caption {
+            text-align: center;
+            margin-top: 14px;
+            font-size: 0.85rem;
+            color: #dbb87c;
+            letter-spacing: 1px;
+            font-style: italic;
+        }
+
+        .advantages-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 24px;
+            margin: 50px 0 40px;
+            justify-content: center;
+        }
+        .advantage-item {
+            flex: 1;
+            min-width: 200px;
+            background: rgba(0,0,0,0.25);
+            border-radius: 24px;
+            padding: 28px 20px;
+            text-align: center;
+            border: 1px solid rgba(201,170,111,0.2);
+            transition: 0.3s;
+        }
+        .advantage-item:hover {
+            border-color: #c9aa6f;
+            background: rgba(201,170,111,0.05);
+            transform: translateY(-5px);
+        }
+        .advantage-item i {
+            font-size: 2.5rem;
+            color: #e6c384;
+            margin-bottom: 16px;
+            display: inline-block;
+        }
+        .advantage-item h4 {
+            font-size: 1.2rem;
+            color: #eed6a4;
+            margin-bottom: 10px;
+        }
+        .advantage-item p {
+            font-size: 0.9rem;
+            color: #cfc5aa;
+        }
+
+        .how-to-order {
+            background: linear-gradient(135deg, #151218 0%, #1d1922 100%);
+            border-radius: 32px;
+            padding: 40px 36px;
+            margin: 40px 0;
+            border: 1px solid rgba(201,170,111,0.3);
+        }
+        .how-to-order h3 {
+            font-size: 1.9rem;
+            margin-bottom: 20px;
+            text-align: center;
+            background: linear-gradient(135deg, #eedfbe, #dbb87c);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        .steps-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 24px;
+            margin-top: 30px;
+        }
+        .step-card {
+            flex: 1;
+            min-width: 180px;
+            text-align: center;
+            padding: 24px 16px;
+            background: rgba(0,0,0,0.3);
+            border-radius: 28px;
+            backdrop-filter: blur(4px);
+            transition: 0.3s;
+            border: 1px solid rgba(201,170,111,0.2);
+        }
+        .step-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(201,170,111,0.5);
+        }
+        .step-number {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, #c9aa6f, #b89458);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 18px;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #0a0a0a;
+        }
+        .step-card h4 {
+            color: #e6cba2;
+            font-size: 1.2rem;
+            margin-bottom: 12px;
+        }
+        .step-card p {
+            color: #cfc5aa;
+            font-size: 0.9rem;
+        }
+
+        .price-grid-modern {
+            background: linear-gradient(135deg, #151218 0%, #1d1922 100%);
+            border-radius: 32px;
+            border: 1px solid rgba(201, 170, 111, 0.3);
+            padding: 32px 36px;
+            margin: 40px 0;
+            box-shadow: 0 15px 30px -10px rgba(0,0,0,0.4);
+        }
+        .price-grid-modern h3 {
+            font-size: 1.9rem;
+            margin-bottom: 28px;
+            background: linear-gradient(135deg, #eedfbe, #dbb87c);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            border-left: 4px solid #c9aa6f;
+            padding-left: 20px;
+        }
+        .price-two-columns {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            justify-content: space-between;
+        }
+        .price-col {
+            flex: 1;
+            min-width: 240px;
+            background: rgba(0,0,0,0.25);
+            padding: 20px 24px;
+            border-radius: 28px;
+        }
+        .price-col h4 {
+            color: #e6cba2;
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+            font-weight: 500;
+            border-bottom: 2px solid rgba(201,170,111,0.5);
+            display: inline-block;
+            padding-bottom: 8px;
+        }
+        .price-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px dashed rgba(201,170,111,0.25);
+        }
+        .price-row span:first-child {
+            color: #cfc5aa;
+        }
+        .price-row span:last-child {
+            color: #eac885;
+            font-weight: 600;
+        }
+        .price-note {
+            margin-top: 30px;
+            background: linear-gradient(135deg, rgba(30,26,35,0.8), rgba(20,18,28,0.9));
+            padding: 16px 24px;
+            border-radius: 24px;
+            font-size: 0.9rem;
+            color: #e0cfb0;
+            border-left: 3px solid #c9aa6f;
+        }
+
+        .slider-section {
+            background: linear-gradient(135deg, #111016 0%, #19171f 100%);
+            padding: 30px 0 50px;
+            border-radius: 44px;
+            margin: 50px 0;
+        }
+
+        .swiper {
+            width: 100%;
+            padding: 20px 0;
+        }
+
+        .swiper-slide {
+            background: linear-gradient(145deg, #201e26, #17151c);
+            border-radius: 28px;
+            overflow: hidden;
+            box-shadow: 0 15px 25px rgba(0,0,0,0.4);
+            transition: transform 0.3s;
+            cursor: pointer;
+        }
+        .swiper-slide:hover {
+            transform: translateY(-5px);
+        }
+        .swiper-slide img {
+            width: 100%;
+            height: 380px;
+            object-fit: cover;
+            display: block;
+        }
+        .slide-caption {
+            padding: 20px;
+            text-align: center;
+            background: rgba(0,0,0,0.4);
+            backdrop-filter: blur(4px);
+        }
+        .slide-caption h4 {
+            color: #eed6a4;
+            margin-bottom: 6px;
+            font-size: 1.1rem;
+        }
+
+        .contacts-footer-block {
+            background: linear-gradient(105deg, #151219 0%, #201c26 100%);
+            border-radius: 36px;
+            padding: 36px 42px;
+            margin: 50px 0 30px;
+            border: 1px solid rgba(201,170,111,0.35);
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            gap: 30px;
+        }
+        .contacts-info h3 {
+            font-size: 1.8rem;
+            color: #eedfbe;
+            margin-bottom: 20px;
+        }
+        .contact-line {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin: 18px 0;
+            color: #e2d4bc;
+        }
+        .contact-line i {
+            width: 32px;
+            font-size: 1.3rem;
+            color: #e6c384;
+        }
+        .contact-line a {
+            color: #e6c384;
+            text-decoration: none;
+        }
+        .workshop-badge {
+            background: linear-gradient(145deg, #211d26, #19161f);
+            padding: 20px 28px;
+            border-radius: 40px;
+            text-align: center;
+            border: 1px solid rgba(201,170,111,0.4);
+        }
+        .workshop-badge i {
+            font-size: 2.2rem;
+            color: #e6c384;
+            margin-bottom: 10px;
+        }
+
+        footer {
+            background: linear-gradient(180deg, #0b0a0e 0%, #050507 100%);
+            padding: 36px 0;
+            text-align: center;
+            border-top: 1px solid rgba(201,170,111,0.2);
+            margin-top: 50px;
+            color: #998f74;
+        }
+
+        @media (max-width: 800px) {
+            .navbar { flex-direction: column; align-items: stretch; }
+            .header-contacts { justify-content: center; }
+            .nav-links { justify-content: center; }
+            .hero h1 { font-size: 2.2rem; }
+            .bio-with-frame { flex-direction: column; }
+            .artist-frame { padding: 0 28px 32px 28px; }
+            .contacts-footer-block { flex-direction: column; text-align: center; }
+            .steps-grid { flex-direction: column; }
+            .advantages-grid { flex-direction: column; }
+            .swiper-slide img { height: 260px; }
+        }
+
+        .lightbox-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(0,0,0,0.92), rgba(10,8,15,0.96));
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(8px);
+        }
+        .lightbox-content img {
+            max-width: 85vw;
+            max-height: 85vh;
+            border-radius: 24px;
+            border: 2px solid rgba(201,170,111,0.7);
+        }
+        .close-lightbox {
+            position: absolute;
+            top: 30px;
+            right: 40px;
+            color: #e6c384;
+            font-size: 42px;
+            cursor: pointer;
+        }
+        
+        .folder-info {
+            background: rgba(201,170,111,0.12);
+            border-radius: 16px;
+            padding: 14px 24px;
+            margin: 20px 0 30px;
+            font-size: 0.85rem;
+            color: #cfc5aa;
+            text-align: center;
+            border: 1px solid rgba(201,170,111,0.3);
+        }
+    </style>
+</head>
+<body>
+
+<nav class="navbar">
+    <div class="logo">Вадим Козловцев <span>мастерская живописи</span></div>
+    <div class="header-contacts">
+        <a href="tel:+79605934804"><i class="fas fa-phone-alt"></i> 8 960 593 48 04</a>
+        </div>
+    <ul class="nav-links">
+        <li><a href="index.html" class="active">Главная</a></li>
+        <li><a href="gallery.html">Галерея</a></li>
+    </ul>
+</nav>
+
+<main class="container">
+    <div class="hero">
+        <h1>Вадим Юрьевич Козловцев (Третьяков)</h1>
+        <p>Художник, член Союза художников России, участник международных выставок</p>
+    </div>
+
+    <div class="bio-with-frame">
+        <div class="bio-text">
+            <h3><i class="fas fa-palette"></i> Приветствую! Я Вадим Козловцев</h3>
+            <p>Рисую с раннего детства, посвятил искусству всю жизнь. Моя мастерская находится в центре Тулы — городе, который я безмерно люблю и часто пишу его улочки, кремль, Ясную Поляну.</p>
+            <div class="artist-quote">
+                <i class="fas fa-quote-left"></i> Портрет — это не просто изображение, это история человека, его характер, настроение, застывшие на холсте. Я пишу маслом на натуральном холсте, вкладывая душу в каждую работу.
+            </div>
+            <p>Отец Вадима — Юрий Львович, был известным художником-графиком, членом Союза художников СССР. Прадед — Павел Петрович Третьяков, великий оружейник, преобразователь пулемета Максима, директор Оружейного завода, основатель КБП.</p>
+            <p>Вадим Юрьевич является членом Союза художников России, членом Международной ассоциации изобразительных искусств АИАП ЮНЕСКО, участник многих выставок в России и за рубежом.</p>
+            <p><strong>Живописный портрет кисти Вадима Юрьевича — это лучший подарок любимому и дорогому человеку! VIP-портрет — самый оригинальный бизнес-подарок высокому начальству и деловому партнеру на торжество и Юбилей.</strong></p>
+            <p>Мастерская находится в центре Тулы. Всегда готов к встрече по предварительной договоренности.</p>
+        </div>
+        <div class="artist-frame">
+            <div class="gallery-frame">
+                <img src="images/artist-portrait.jpg" alt="Вадим Козловцев" onerror="this.src='https://picsum.photos/id/132/400/500'">
+                <div class="frame-caption">Вадим Козловцев | мастерская в Туле</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="advantages-grid">
+        <div class="advantage-item"><i class="fas fa-hand-holding-heart"></i><h4>Ручная работа</h4><p>Каждый портрет пишется вручную масляными красками. Никаких печатей — только живая живопись.</p></div>
+        <div class="advantage-item"><i class="fas fa-paintbrush-fine"></i><h4>Натуральный холст</h4><p>Высококачественные льняные холсты и профессиональные масляные краски.</p></div>
+        <div class="advantage-item"><i class="fas fa-camera-retro"></i><h4>По фото или с натуры</h4><p>Можно прислать фотографию или заказать сеанс в мастерской.</p></div>
+        <div class="advantage-item"><i class="fas fa-truck"></i><h4>Доставка по России</h4><p>Отправляю готовые работы в любой город в надёжной упаковке.</p></div>
+    </div>
+
+    <div class="how-to-order">
+        <h3><i class="fas fa-clipboard-list"></i> Как заказать портрет маслом</h3>
+        <div class="steps-grid">
+            <div class="step-card"><div class="step-number">1</div><h4>Свяжитесь со мной</h4><p>Позвоните или напишите — обсудим идею, размер, сроки и цену.</p></div>
+            <div class="step-card"><div class="step-number">2</div><h4>Пришлите фото</h4><p>Достаточно 1-2 качественных снимков.</p></div>
+            <div class="step-card"><div class="step-number">3</div><h4>Согласование эскиза</h4><p>Показываю предварительный набросок, утверждаем композицию.</p></div>
+            <div class="step-card"><div class="step-number">4</div><h4>Создание и доставка</h4><p>Пишу портрет маслом (от 7 до 20 дней).</p></div>
+        </div>
+    </div>
+
+    <div class="price-grid-modern">
+        <h3><i class="fas fa-ruble-sign"></i> Стоимость портрета маслом на холсте</h3>
+        <div class="price-two-columns">
+            <div class="price-col"><h4>Портрет одного лица</h4><div class="price-row"><span>30×40 см</span><span>от 10 000 ₽</span></div><div class="price-row"><span>40×50 см</span><span>от 15 000 ₽</span></div><div class="price-row"><span>50×60 / 50×70 см</span><span>от 20 000 ₽</span></div><div class="price-row"><span>60×70 / 60×80 см</span><span>от 25 000 ₽</span></div></div>
+            <div class="price-col"><h4>Парный портрет</h4><div class="price-row"><span>40×50 см</span><span>от 25 000 ₽</span></div><div class="price-row"><span>50×60 / 50×70 см</span><span>от 30 000 ₽</span></div><div class="price-row"><span>60×70 / 60×80 см</span><span>от 40 000 ₽</span></div></div>
+        </div>
+        <div class="price-note"><i class="fas fa-info-circle"></i> Цена зависит от сложности фона. Семейный портрет — договорная.<br><i class="fas fa-clock"></i> Срок исполнения: от 7 дней.</div>
+    </div>
+
+    <div class="slider-section">
+        <div class="section-title"><i class="fas fa-images"></i> Избранные работы</div>
+        <div class="swiper gallerySwiper">
+            <div class="swiper-wrapper" id="slider-wrapper">
+                <div class="swiper-slide"><div class="loading-placeholder" style="height:380px; display:flex; align-items:center; justify-content:center;"><i class="fas fa-spinner fa-pulse"></i> Загрузка работ...</div></div>
+            </div>
+            <div class="swiper-button-prev" style="color:#e6c384;"></div>
+            <div class="swiper-button-next" style="color:#e6c384;"></div>
+            <div class="swiper-pagination" style="--swiper-pagination-color: #e6c384;"></div>
+        </div>
+        <div class="folder-info" style="margin-top: 20px;">
+                   </div>
+    </div>
+
+    <div class="contacts-footer-block">
+        <div class="contacts-info">
+            <h3><i class="fas fa-address-card"></i> Контакты</h3>
+            <div class="contact-line"><i class="fas fa-envelope"></i> <a href="mailto:vadim.rospis@yandex.ru">vadim.rospis@yandex.ru</a></div>
+            <div class="contact-line"><i class="fas fa-phone-alt"></i> 8 960 593 48 04</div>
+            <div class="contact-line"><i class="fas fa-map-marker-alt"></i> г. Тула, Красноармейский пр., 16, 6 подъезд</div>
+            <div class="contact-line"><i class="fas fa-clock"></i> По предварительной договоренности</div>
+        </div>
+        <div class="workshop-badge">
+            <i class="fas fa-paintbrush-fine"></i>
+            <p>Мастерская в центре Тулы</p>
+            <p style="font-size: 0.8rem;">Заказ портрета по фото<br>Холст / масло</p>
+        </div>
+    </div>
+</main>
+
+<footer>
+    <div class="container">
+        <p>© Вадим Козловцев (Третьяков) | Мастерская в Туле | Член Союза художников России, АИАП ЮНЕСКО</p>
+        <p style="font-size: 0.75rem; margin-top: 8px;">Ручная работа маслом на холсте. Заказ портрета по фото. Доставка по России.</p>
+    </div>
+</footer>
+
+<div id="lightboxModal" class="lightbox-modal">
+    <span class="close-lightbox">&times;</span>
+    <div class="lightbox-content">
+        <img id="lightboxImg" src="" alt="Изображение">
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script>
+    const IMAGES_BASE = "images/";
+    
+    function loadSliderImages() {
+        const wrapper = document.getElementById('slider-wrapper');
+        if (!wrapper) return;
+        
+        const sliderFolder = `${IMAGES_BASE}slider/`;
+        const foundSlides = [];
+        let checkedCount = 0;
+        const MAX_SLIDES = 20;
+        
+        function checkSlide(number) {
+            const fullUrl = `${sliderFolder}${number}.jpg`;
+            const img = new Image();
+            img.onload = () => {
+                foundSlides.push({ url: fullUrl, number: number });
+                checkedCount++;
+                if (checkedCount === MAX_SLIDES) renderSlider();
+            };
+            img.onerror = () => {
+                checkedCount++;
+                if (checkedCount === MAX_SLIDES) renderSlider();
+            };
+            img.src = fullUrl;
+        }
+        
+        function renderSlider() {
+            if (foundSlides.length === 0) {
+                wrapper.innerHTML = `
+                    <div class="swiper-slide"><img src="https://picsum.photos/id/104/800/600"><div class="slide-caption"><h4>Добавьте свои работы</h4><p>Поместите фото в папку /images/slider/ с именами 1.jpg, 2.jpg...</p></div></div>
+                    <div class="swiper-slide"><img src="https://picsum.photos/id/20/800/600"><div class="slide-caption"><h4>Портрет маслом</h4><p>Пример работы художника</p></div></div>
+                    <div class="swiper-slide"><img src="https://picsum.photos/id/30/800/600"><div class="slide-caption"><h4>Пейзаж Тулы</h4><p>Избранные работы</p></div></div>
+                `;
+            } else {
+                wrapper.innerHTML = '';
+                foundSlides.sort((a, b) => a.number - b.number);
+                foundSlides.forEach(slide => {
+                    const slideDiv = document.createElement('div');
+                    slideDiv.className = 'swiper-slide';
+                    slideDiv.innerHTML = `
+                        <img src="${slide.url}" alt="Работа ${slide.number}" loading="lazy">
+                        <div class="slide-caption">
+                            <h4>Работа из коллекции</h4>
+                        </div>
+                    `;
+                    slideDiv.addEventListener('click', () => openLightbox(slide.url, `Избранная работа`));
+                    wrapper.appendChild(slideDiv);
+                });
+            }
+            if (window.homeSwiper) {
+                window.homeSwiper.update();
+            } else {
+                initHomeSwiper();
+            }
+        }
+        
+        for (let i = 1; i <= MAX_SLIDES; i++) checkSlide(i);
+        setTimeout(() => { if (foundSlides.length === 0 && wrapper.children.length === 0) renderSlider(); }, 2000);
+    }
+    
+    const lightbox = document.getElementById('lightboxModal');
+    const lightboxImg = document.getElementById('lightboxImg');
+    function openLightbox(src, alt) {
+        lightboxImg.src = src;
+        lightbox.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+    }
+    function closeLightbox() {
+        lightbox.style.display = 'none';
+        document.body.style.overflow = '';
+    }
+    document.querySelector('.close-lightbox')?.addEventListener('click', closeLightbox);
+    lightbox.addEventListener('click', (e) => { if (e.target === lightbox) closeLightbox(); });
+    
+    let homeSwiper = null;
+    function initHomeSwiper() {
+        if (homeSwiper) homeSwiper.destroy(true, true);
+        homeSwiper = new Swiper('.gallerySwiper', {
+            loop: true,
+            slidesPerView: 1,
+            spaceBetween: 20,
+            pagination: { el: '.swiper-pagination', clickable: true },
+            navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' },
+            breakpoints: { 768: { slidesPerView: 2 }, 1024: { slidesPerView: 3 } }
+        });
+    }
+    
+    loadSliderImages();
+    setTimeout(() => initHomeSwiper(), 300);
+</script>
+</body>
+</html>
