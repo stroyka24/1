@@ -1,1 +1,0 @@
-Place your images and video here: logo.png, hero.mp4, founder.jpg, safari.jpg, wine.jpg, cape.jpg, whales.jpg
